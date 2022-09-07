@@ -58,25 +58,32 @@
                 tableHead += "<th class='align-top'>JAM PULANG</th>";
                 tableHead += "</tr>";
               } else {
-                tableBody += "<tr>";
-                row.forEach((val) => (tableBody += "<td>" + (val.length > 50 ? val.substr(0,50)+"..." : val) + "</td>"));
-                if(row.length < 4) {
-                  tableBody += "<td><span class='badge bg-danger'>Lokasi tidak terekam</span></td>";
-                }
-                let ad = new Date(row[0]);
-                let pd = new Date();
-                if(ad.getDay == 5) {
-                  pd.setTime(ad.getTime() + 9 * 60 * 60 * 1000)
+                if(row.length < 1) {
+                  tableBody += "<td colspan='5'>Belum ada data...</td>";
                 } else {
-                  pd.setTime(ad.getTime() + 8.5 * 60 * 60 * 1000)
-                }
+                  tableBody += "<tr>";
+                  row.forEach((val) => (tableBody += "<td>" + (val.length > 50 ? val.substr(0,50)+"..." : val) + "</td>"));
+                  if(row.length < 4) {
+                    tableBody += "<td><span class='badge bg-danger'>Lokasi tidak terekam</span></td>";
+                  }
+                  let ad = new Date(row[0]);
+                  let pd = new Date();
+                  if(ad.getDay == 5) {
+                    pd.setTime(ad.getTime() + 9 * 60 * 60 * 1000)
+                  } else {
+                    pd.setTime(ad.getTime() + 8.5 * 60 * 60 * 1000)
+                  }
 
-                if(pd.getHours() < 16 ) {
-                  pd.setHours(16,00,00,00);
+                  if(pd.getHours() < 16 ) {
+                    if(ad.getDay == 5) {
+                    pd.setHours(16,30,00,00);
+                    } else {
+                      pd.setHours(16,00,00,00);
+                    }
+                  }
+                  tableBody += "<td>" + pd.getHours() + ":" + ('0' + pd.getMinutes()).slice(-2) + ":" + ('0' + pd.getSeconds()).slice(-2) + "</td>"
+                  tableBody += "</tr>";
                 }
-                tableBody += "<td>" + pd.getHours() + ":" + ('0' + pd.getMinutes()).slice(-2) + ":" + ('0' + pd.getSeconds()).slice(-2) + "</td>"
-                tableBody += "</tr>";
-                
               }
             });
   
