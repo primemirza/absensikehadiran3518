@@ -58,7 +58,7 @@
                 tableHead += "<th class='align-top'>JAM PULANG</th>";
                 tableHead += "</tr>";
               } else {
-                if(row.length < 1) {
+                if(row[0] == "#N/A") {
                   tableBody += "<td colspan='5'>Belum ada data...</td>";
                 } else {
                   tableBody += "<tr>";
