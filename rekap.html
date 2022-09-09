@@ -85,6 +85,8 @@
                   }
                   tableBody += "<td>" + pd.getHours() + ":" + ('0' + pd.getMinutes()).slice(-2) + ":" + ('0' + pd.getSeconds()).slice(-2) + "</td>"
                   tableBody += "</tr>";
+                  
+                  $('#rekap').DataTable();
                 }
               }
             });
@@ -109,10 +111,6 @@
           });
         }
       }
-      
-      $(document).ready( function () {
-        $('#rekap').DataTable();
-      });
     </script>
   </body>
 </html>
