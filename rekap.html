@@ -68,7 +68,7 @@
                   }
                   let ad = new Date(row[0]);
                   let pd = new Date();
-                  if(ad.getDay == 5) {
+                  if(ad.getDay() == 5) {
                     pd.setTime(ad.getTime() + 9 * 60 * 60 * 1000)
                   } else {
                     pd.setTime(ad.getTime() + 8.5 * 60 * 60 * 1000)
