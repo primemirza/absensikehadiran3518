@@ -55,33 +55,41 @@
               if (index === 0) {
                 tableHead += "<tr class='bg-primary text-light'>";
                 row.forEach((val) => (tableHead += "<th class='align-top'>" + val + "</th>"));
-                tableHead += "<th class='align-top'>JAM PULANG</th>";
-                tableHead += "</tr>";
+                if(cd.getHours() < 13) {
+                  tableHead += "<th class='align-top'>JAM PULANG</th>";
+                  tableHead += "</tr>";
+                }
               } else {
                 if(row[0] == "#N/A") {
-                  tableBody += "<td colspan='5'>Belum ada data...</td>";
+                  if(cd.getHours() < 13) {
+                    tableBody += "<td colspan='5'>Belum ada data...</td>";
+                  } else {
+                    tableBody += "<td colspan='4'>Belum ada data...</td>";
+                  }
                 } else {
                   tableBody += "<tr>";
                   row.forEach((val) => (tableBody += "<td>" + (val.length > 50 ? val.substr(0,50)+"..." : val) + "</td>"));
                   if(row.length < 4) {
                     tableBody += "<td><span class='badge bg-danger'>Lokasi tidak terekam</span></td>";
                   }
-                  let ad = new Date(row[0]);
-                  let pd = new Date();
-                  if(ad.getDay() == 5) {
-                    pd.setTime(ad.getTime() + 9 * 60 * 60 * 1000)
-                  } else {
-                    pd.setTime(ad.getTime() + 8.5 * 60 * 60 * 1000)
-                  }
-
-                  if(pd.getHours() < 16 ) {
+                  if(cd.getHours() < 13) {
+                    let ad = new Date(row[0]);
+                    let pd = new Date();
                     if(ad.getDay() == 5) {
-                    pd.setHours(16,30,00,00);
+                      pd.setTime(ad.getTime() + 9 * 60 * 60 * 1000)
                     } else {
-                      pd.setHours(16,00,00,00);
+                      pd.setTime(ad.getTime() + 8.5 * 60 * 60 * 1000)
                     }
+
+                    if(pd.getHours() < 16 ) {
+                      if(ad.getDay() == 5) {
+                      pd.setHours(16,30,00,00);
+                      } else {
+                        pd.setHours(16,00,00,00);
+                      }
+                    }
+                    tableBody += "<td>" + pd.getHours() + ":" + ('0' + pd.getMinutes()).slice(-2) + ":" + ('0' + pd.getSeconds()).slice(-2) + "</td>"
                   }
-                  tableBody += "<td>" + pd.getHours() + ":" + ('0' + pd.getMinutes()).slice(-2) + ":" + ('0' + pd.getSeconds()).slice(-2) + "</td>"
                   tableBody += "</tr>";
                 }
               }
@@ -94,7 +102,7 @@
           function loadData() {
             // Spreadsheet ID
             const spreadsheetId = "1bTeScfwfaUIYsk-eAiAZ5wCf5sn4XgSLPjuKhVGQSHc";
-            const range = "Sheet1!A:D";
+            const range = (cd.getHours() <13 ? "Sheet1" : "Sheet2") + "!A:D";
             getPublicValues({ spreadsheetId, range }, displayResult2);
           }
   
