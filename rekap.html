@@ -73,7 +73,8 @@
                     tableBody += "<td><span class='badge bg-danger'>Lokasi tidak terekam</span></td>";
                   }
                   if(cd.getHours() < 13) {
-                    let ad = new Date(row[0]);
+                    let ad = new Date(row[0].substr(3,2)+"/"+row[0].substr(0,2)+"/"+row[0].substr(6,4)+" "+row[0].substr(10,10));
+                    console.log(row[0].substr(3,2)+"/"+row[0].substr(0,2)+"/"+row[0].substr(6,4)+" "+row[0].substr(10,10));
                     let pd = new Date();
                     if(ad.getDay() == 5) {
                       pd.setTime(ad.getTime() + 9 * 60 * 60 * 1000)
