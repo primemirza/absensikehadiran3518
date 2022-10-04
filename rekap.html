@@ -50,29 +50,23 @@
           function displayResult2(response) {
             let tableHead = "";
             let tableBody = "";
-            
+            console.log(response.result.values)
             response.result.values.forEach((row, index) => {
               if (index === 0) {
                 tableHead += "<tr class='bg-primary text-light'>";
                 row.forEach((val) => (tableHead += "<th class='align-top'>" + val + "</th>"));
-                if(cd.getHours() < 13) {
-                  tableHead += "<th class='align-top'>JAM PULANG</th>";
-                  tableHead += "</tr>";
-                }
+                tableHead += "<th class='align-top'>JAM PULANG</th>";
+                tableHead += "</tr>";
               } else {
                 if(row[0] == "#N/A") {
-                  if(cd.getHours() < 13) {
-                    tableBody += "<td colspan='5'>Belum ada data...</td>";
-                  } else {
-                    tableBody += "<td colspan='4'>Belum ada data...</td>";
-                  }
+                  tableBody += "<td colspan='4'>Belum ada data...</td>";
                 } else {
                   tableBody += "<tr>";
                   row.forEach((val) => (tableBody += "<td>" + (val.length > 50 ? val.substr(0,50)+"..." : val) + "</td>"));
                   if(row.length < 4) {
                     tableBody += "<td><span class='badge bg-danger'>Lokasi tidak terekam</span></td>";
                   }
-                  if(cd.getHours() < 13) {
+                  if(row[1] == "DATANG") {
                     let ad = new Date(row[0].substr(3,2)+"/"+row[0].substr(0,2)+"/"+row[0].substr(6,4)+" "+row[0].substr(10,10));
                     console.log(row[0].substr(3,2)+"/"+row[0].substr(0,2)+"/"+row[0].substr(6,4)+" "+row[0].substr(10,10));
                     let pd = new Date();
@@ -90,6 +84,8 @@
                       }
                     }
                     tableBody += "<td>" + pd.getHours() + ":" + ('0' + pd.getMinutes()).slice(-2) + ":" + ('0' + pd.getSeconds()).slice(-2) + "</td>"
+                  } else {
+                    tableBody += "<td>-<td>";
                   }
                   tableBody += "</tr>";
                 }
@@ -103,7 +99,7 @@
           function loadData() {
             // Spreadsheet ID
             const spreadsheetId = "1bTeScfwfaUIYsk-eAiAZ5wCf5sn4XgSLPjuKhVGQSHc";
-            const range = (cd.getHours() <13 ? "Sheet1" : "Sheet2") + "!A:D";
+            const range = "Sheet1!A:D";
             getPublicValues({ spreadsheetId, range }, displayResult2);
           }
   
