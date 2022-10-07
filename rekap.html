@@ -72,17 +72,16 @@
                     let pd = new Date();
                     if(ad.getDay() == 5) {
                       pd.setTime(ad.getTime() + 9 * 60 * 60 * 1000)
+                      if(pd.getHours() <=16 && pd.getMinutes() < 30) {
+                        pd.setHours(16,30,00,00);
+                      }
                     } else {
                       pd.setTime(ad.getTime() + 8.5 * 60 * 60 * 1000)
-                    }
-
-                    if(pd.getHours() < 16 ) {
-                      if(ad.getDay() == 5) {
-                      pd.setHours(16,30,00,00);
-                      } else {
+                      if(pd.getHours() < 6) {
                         pd.setHours(16,00,00,00);
                       }
                     }
+                    
                     tableBody += "<td>" + pd.getHours() + ":" + ('0' + pd.getMinutes()).slice(-2) + ":" + ('0' + pd.getSeconds()).slice(-2) + "</td>"
                   } else {
                     tableBody += "<td>-<td>";
