@@ -59,7 +59,7 @@
                 tableHead += "</tr>";
               } else {
                 if(row[0] == "#N/A") {
-                  tableBody += "<td colspan='4'>Belum ada data...</td>";
+                  tableBody += "<td colspan='5'>Belum ada data...</td>";
                 } else {
                   tableBody += "<tr>";
                   row.forEach((val) => (tableBody += "<td>" + (val.length > 50 ? val.substr(0,50)+"..." : val) + "</td>"));
