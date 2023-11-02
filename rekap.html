@@ -59,10 +59,10 @@
                 tableHead += "</tr>";
               } else {
                 if(row[0] == "#N/A") {
-                  tableBody += "<td colspan='6'>Belum ada data...</td>";
+                  tableBody += "<td colspan='4'>Belum ada data...</td>";
                 } else {
                   tableBody += "<tr>";
-                  row.forEach((val) => (tableBody += "<td>" + (val.length > 50 ? val.substr(0,50)+"..." : val) + "</td>"));
+                  row.forEach((val) => (tableBody += "<td>" + (val.length > 50 && val.length != 107 ? val.substr(0,50)+"..." : val) + "</td>"));
                   if(row.length < 4) {
                     tableBody += "<td><span class='badge bg-danger'>Lokasi tidak terekam</span></td>";
                   }
@@ -85,7 +85,11 @@
                     console.log(pd);
                     tableBody += "<td>" + pd.getHours() + ":" + ('0' + pd.getMinutes()).slice(-2) + ":" + ('0' + pd.getSeconds()).slice(-2) + "</td>"
                   } else {
-                    tableBody += "<td>-<td>";
+                    if (row[4] == 'BELUM') {
+                      tableBody += '<td><button type="button" onclick="location.href='+"'https://google.com'"+'" style="border: 1px solid transparent; border-radius:4px; padding:4 8; background: orange">Isi LPK</button><td>';
+                    } else {
+                      tableBody += "<td>-<td>";
+                    }
                   }
                   tableBody += "</tr>";
                 }
