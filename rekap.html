@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rekap Absensi Kehadiran</title>
+    <title>Rekap Presensi Kehadiran</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="https://primemirza.github.io/20220801/logo.ico">
   </head>
@@ -11,7 +11,7 @@
       <div class="card">
         <div class="card-header text-center">
           <h3 class="card-title" id="judul">
-            Rekap Absensi 
+            Rekap Presensi 
           </h3>
         </div>
         <div class="card-body table-responsive">
@@ -59,13 +59,14 @@
                 tableHead += "</tr>";
               } else {
                 if(row[0] == "#N/A") {
-                  tableBody += "<td colspan='7'>Belum ada data...</td>";
+                  tableBody += "<tr><td colspan='6' class='text-center'>Belum ada data...</td>";
                 } else {
                   tableBody += "<tr>";
-                  row.forEach((val) => (tableBody += "<td>" + (val.length > 50 && val.length != 107 ? val.substr(0,50)+"..." : val) + "</td>"));
-                  if(row.length < 4) {
+                  row.forEach((val) => (tableBody += "<td>" + (val.length > 50 && val.length !== 173 && val.length !== 140 ? val.substr(0,50)+"..." : val) + "</td>"));
+                  if(row.length < 5) {
                     tableBody += "<td><span class='badge bg-danger'>Lokasi tidak terekam</span></td>";
                   }
+
                   if(row[1] == "DATANG") {
                     let ad = new Date(row[0].substr(3,2)+"/"+row[0].substr(0,2)+"/"+row[0].substr(6,4)+" "+row[0].substr(10,10));
                     // console.log(row[0].substr(3,2)+"/"+row[0].substr(0,2)+"/"+row[0].substr(6,4)+" "+row[0].substr(10,10));
@@ -82,20 +83,15 @@
                         pd.setHours(16,00,00,00);
                       }
                     }
-                    console.log(pd);
                     tableBody += "<td>" + pd.getHours() + ":" + ('0' + pd.getMinutes()).slice(-2) + ":" + ('0' + pd.getSeconds()).slice(-2) + "</td>"
                   } else {
-                    if (row[4] == 'BELUM') {
-                      tableBody += '<td><button type="button" onclick="location.href='+"'https://google.com'"+'" style="border: 1px solid transparent; border-radius:4px; padding:4 8; background: orange">Isi LPK</button><td>';
-                    } else {
-                      tableBody += "<td>-<td>";
-                    }
+                    tableBody += "<td>-</td>";
                   }
                   tableBody += "</tr>";
                 }
               }
             });
-  
+            console.log(tableBody);
             document.getElementById("table-head").innerHTML = tableHead;
             document.getElementById("table-body").innerHTML = tableBody;
           }
