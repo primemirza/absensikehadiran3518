@@ -62,7 +62,7 @@
                   tableBody += "<tr><td colspan='6' class='text-center'>Belum ada data...</td>";
                 } else {
                   tableBody += "<tr>";
-                  row.forEach((val) => (tableBody += "<td>" + (val.length > 50 && val.length !== 173 && val.length !== 140 ? val.substr(0,50)+"..." : val) + "</td>"));
+                  row.forEach((val) => (tableBody += "<td>" + (val.length > 50 && val.length !== 269 && val.length !== 140 ? val.substr(0,50)+"..." : val) + "</td>"));
                   if(row.length < 5) {
                     tableBody += "<td><span class='badge bg-danger'>Lokasi tidak terekam</span></td>";
                   }
