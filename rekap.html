@@ -8,21 +8,20 @@
   </head>
   <body>
     <div class="container-fluid mt-3">
-      <div class="card">
-        <div class="card-header text-center">
-          <h3 class="card-title" id="judul">
-            Rekap Presensi 
-          </h3>
-        </div>
-        <div class="card-body table-responsive">
+      <div class="row">
+        <div class="col-md-8 offset-md-2 col-xs-12 p-1">
+          <h3 class="text-center mb-3" id="judul">Rekap Presensi</h3>
+          <div class="alert alert-warning p-2">
+            Bagi Pegawai ASN silahkan mengisi Laporan Prestasi Kerja <a href="https://script.google.com/macros/s/AKfycbz7VmHy894FVSpsgiEwdW3nlXyEOC1sUCiKRJxDAMLbwhMvxms6i0nlfL4Igc6bxsF2UQ/exec" class="alert-link">disini</a>. Status pengisian LPK perhari dapat dilihat pada kolom LPK pada saat mengisi <strong>presensi pulang</strong> atau <strong>Dinas Luar</strong>.
+          </div>
           <table class="table table-striped" id="rekap">
             <thead id="table-head">
             </thead>
             <tbody id="table-body"></tbody>
           </table>
-        </div>
-        <div class="card-footer text-center">
-          <p>KPU Kabupaten Nganjuk &copy; <script>document.write(new Date().getFullYear())</script></p>
+          <footer class="text-center p-3">
+            <p>KPU Kabupaten Nganjuk &copy; <script>document.write(new Date().getFullYear())</script></p>
+          </footer>
         </div>
       </div>
     </div>
@@ -62,7 +61,7 @@
                   tableBody += "<tr><td colspan='6' class='text-center'>Belum ada data...</td>";
                 } else {
                   tableBody += "<tr>";
-                  row.forEach((val) => (tableBody += "<td>" + (val.length > 50 && val.length !== 269 && val.length !== 140 ? val.substr(0,50)+"..." : val) + "</td>"));
+                  row.forEach((val) => (tableBody += "<td>" + (val.length > 50 ? val.substr(0,50)+"..." : val) + "</td>"));
                   if(row.length < 5) {
                     tableBody += "<td><span class='badge bg-danger'>Lokasi tidak terekam</span></td>";
                   }
