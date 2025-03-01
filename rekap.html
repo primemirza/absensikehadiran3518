@@ -75,7 +75,10 @@
                     if(ad.getDay() == 5) {
                     
                       // JAM KERJA JUM'AT REGULAR 9 JAM 
-                      pd.setTime(ad.getTime() + 9 * 60 * 60 * 1000)
+                      // pd.setTime(ad.getTime() + 9 * 60 * 60 * 1000)
+
+                      // JAM KERJA JUM'AT RAMADHAN 7.5 JAM 
+                      pd.setTime(ad.getTime() + 7.5 * 60 * 60 * 1000)
                       
                       // JAM PULANG MINIMAL
                       if((pd.getHours() < 16) || (pd.getHours() == 16 && pd.getMinutes() < 30)) {
@@ -84,7 +87,10 @@
                     } else {
 
                       // JAM KERJA XJUM'AT REGULAR 8.5 JAM 
-                      pd.setTime(ad.getTime() + 8.5 * 60 * 60 * 1000)
+                      // pd.setTime(ad.getTime() + 8.5 * 60 * 60 * 1000)
+
+                      // JAM KERJA XJUM'AT RAMADHAN 7 JAM 
+                      pd.setTime(ad.getTime() + 7 * 60 * 60 * 1000)
 
                       // JAM PULANG MINIMAL
                       if(pd.getHours() < 16) {
